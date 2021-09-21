@@ -1,13 +1,17 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap";
-import { BrowserRouter as Router } from "react-router-dom";
-import SwitchComponent from "./components/SwitchComponent";
+import "./assets/css/styles.css";
+import Home from "./components/home/Home";
+import Footer from "./components/layout/Footer";
+import Header from "./components/layout/Header";
 
 function App() {
   return (
-    <Router>
-      <SwitchComponent />
-    </Router>
+    <div>
+      <Header />
+      <Home />
+      <Footer />
+    </div>
   );
 }
 
