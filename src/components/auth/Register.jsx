@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { RegisterAuthAction } from "../../redux/actions/authAction-creators";
 
 const Register = (props) => {
-  const { user, register } = props;
   const [userState, setUserState] = useState({});
+  console.log(props.state);
 
   return (
     <div>
@@ -29,8 +29,7 @@ const Register = (props) => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                // console.log(user);
-                register(userState);
+                props.register(userState);
               }}
             >
               <div className="form-group">
@@ -103,7 +102,7 @@ const Register = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state,
+    state: state.authReducer,
   };
 };
 

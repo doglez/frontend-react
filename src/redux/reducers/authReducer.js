@@ -1,6 +1,6 @@
 import * as ActionTypes from "../actions/action-types";
 
-const authState = {
+const initialState = {
   user: {
     name: "",
     email: "",
@@ -8,10 +8,10 @@ const authState = {
   },
 };
 
-const authReducer = (state = authState, action) => {
-  switch (action.type) {
+const authReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
     case ActionTypes.REGISTER_SUCCESS:
-      return { user: action.pyload };
+      return { ...payload };
 
     case ActionTypes.REGISTER_FAIL:
       return state;
