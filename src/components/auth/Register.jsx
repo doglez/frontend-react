@@ -5,7 +5,7 @@ import { RegisterAuthAction } from "../../redux/actions/authAction-creators";
 
 const Register = (props) => {
   const [userState, setUserState] = useState({});
-  console.log(props.state);
+  // console.log(props.state);
 
   return (
     <div>

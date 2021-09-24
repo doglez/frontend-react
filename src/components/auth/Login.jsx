@@ -23,14 +23,14 @@ const Login = () => {
             </div>
             <form>
               <div className="form-group">
-                <label for="InputEmail">Email address</label>
+                <label htmlFor="InputEmail">Email address</label>
                 <input type="email" className="form-control form-control-sm" />
                 <small id="emailHelp" className="form-text text-muted">
                   We'll never share your email with anyone else.
                 </small>
               </div>
               <div className="form-group">
-                <label for="InputPassword1">Password</label>
+                <label htmlFor="InputPassword1">Password</label>
                 <input
                   type="password"
                   className="form-control form-control-sm"

@@ -1,11 +1,13 @@
 import * as ActionTypes from "../actions/action-types";
 
 const initialState = {
+  isLoggedIn: "",
   user: {
     name: "",
     email: "",
     id: "",
   },
+  token: "",
 };
 
 const authReducer = (state = initialState, { type, payload }) => {
