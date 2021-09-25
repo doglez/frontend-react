@@ -8,11 +8,13 @@ const initialState = {
     id: "",
   },
   token: "",
+  expireToken: "",
 };
 
 const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ActionTypes.REGISTER_SUCCESS:
+      localStorage.setItem("auth", JSON.stringify(payload));
       return { ...payload };
 
     case ActionTypes.REGISTER_FAIL:
