@@ -14,7 +14,7 @@ import * as ActionTypes from "../actions/action-types";
 //   };
 // };
 
-export const RegisterAuthAction = (userState) => (dispatch) =>
+export const RegisterAuthAction = (userState) => (dispatch) => {
   axios
     .post("register", userState)
     .then((r) => {
@@ -30,3 +30,24 @@ export const RegisterAuthAction = (userState) => (dispatch) =>
         payload: {},
       });
     });
+};
+
+export const LogOutAuthAction = (history) => (dispatch) => {
+  axios
+    .get("logout")
+    .then((r) => {
+      dispatch({
+        type: ActionTypes.LOGOUT_SUCCESS,
+        payload: r.data,
+      });
+      history.push("/");
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch({
+        type: ActionTypes.LOTOUT_FAIL,
+        payload: {},
+      });
+      history.push("/");
+    });
+};

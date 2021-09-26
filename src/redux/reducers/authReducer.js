@@ -2,7 +2,7 @@ import * as ActionTypes from "../actions/action-types";
 import axios from "axios";
 
 const initialState = {
-  isLoggedIn: "",
+  isLoggedIn: false,
   user: {
     name: "",
     email: "",
@@ -37,10 +37,19 @@ const authReducer = (state = authState, { type, payload }) => {
   switch (type) {
     case ActionTypes.REGISTER_SUCCESS:
       localStorage.setItem("auth", JSON.stringify(payload));
+      axios.defaults.headers.common["Authorization"] = payload.token;
       return { ...payload };
 
     case ActionTypes.REGISTER_FAIL:
       return state;
+
+    case ActionTypes.LOGOUT_SUCCESS:
+      localStorage.removeItem("auth");
+      return { ...initialState };
+
+    case ActionTypes.LOTOUT_FAIL:
+      localStorage.removeItem("auth");
+      return { ...initialState };
 
     default:
       return state;

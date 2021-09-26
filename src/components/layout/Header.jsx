@@ -1,9 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { LogOutAuthAction } from "../../redux/actions/authAction-creators";
 
-const Header = () => {
-  const state = useSelector((state) => state.authReducer);
+const Header = (props) => {
+  const history = useHistory();
 
   return (
     <div>
@@ -14,14 +15,27 @@ const Header = () => {
           </h5>
         </Link>
         <div className="ml-auto d-flex">
-          <h4 className="mx-2">Hi {state.user.name}</h4>
-          <Link to="logout">
-            <button className="btn btn-danger btn-sm mx-2">Log out</button>
-          </Link>
+          <h4 className="mx-2">Hi {props.state.user.name}</h4>
+          <button
+            className="btn btn-danger btn-sm mx-2"
+            onClick={() => props.logOut(history)}
+          >
+            Log out
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  state: state.authReducer,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  logOut: (history) => {
+    dispatch(LogOutAuthAction(history));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
