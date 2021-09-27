@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { LoginAuthAction } from "../../redux/actions/authAction-creators";
 
-const Login = () => {
+const Login = (props) => {
+  const [userState, setUserState] = useState({});
+
   return (
     <div>
       <div className="sign-in-main">
@@ -21,10 +25,22 @@ const Login = () => {
                 </button>
               </div>
             </div>
-            <form>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                props.login(userState);
+              }}
+            >
               <div className="form-group">
                 <label htmlFor="InputEmail">Email address</label>
-                <input type="email" className="form-control form-control-sm" />
+                <input
+                  type="email"
+                  className="form-control form-control-sm"
+                  onChange={(e) => {
+                    const email = e.target.value;
+                    setUserState({ ...useState, ...{ email } });
+                  }}
+                />
                 <small id="emailHelp" className="form-text text-muted">
                   We'll never share your email with anyone else.
                 </small>
@@ -34,6 +50,10 @@ const Login = () => {
                 <input
                   type="password"
                   className="form-control form-control-sm"
+                  onChange={(e) => {
+                    const password = e.target.value;
+                    setUserState({ ...userState, ...{ password } });
+                  }}
                 />
               </div>
               <button type="submit" className="btn btn-danger btn-sm">
@@ -47,4 +67,14 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+  state: state.authReducer,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  login: (userState) => {
+    dispatch(LoginAuthAction(userState));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

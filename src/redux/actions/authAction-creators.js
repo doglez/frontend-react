@@ -1,19 +1,6 @@
 import axios from "axios";
 import * as ActionTypes from "../actions/action-types";
 
-// export const RegisterAuthAction = (userState) => {
-//   return async (dispatch) => {
-//     try {
-//       const resp = await axios.post("register", userState);
-//       const { data } = resp;
-//       dispatch({ type: ActionTypes.REGISTER_SUCCESS, payload: data });
-//     } catch (error) {
-//       console.error(error);
-//       dispatch({ type: ActionTypes.REGISTER_FAIL, payload: {} });
-//     }
-//   };
-// };
-
 export const RegisterAuthAction = (userState) => (dispatch) => {
   axios
     .post("register", userState)
@@ -49,5 +36,23 @@ export const LogOutAuthAction = (history) => (dispatch) => {
         payload: {},
       });
       history.push("/");
+    });
+};
+
+export const LoginAuthAction = (userState) => (dispatch) => {
+  axios
+    .post("login", userState)
+    .then((r) => {
+      dispatch({
+        type: ActionTypes.LOGIN_SUCESS,
+        payload: r.data,
+      });
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch({
+        type: ActionTypes.LOGIN_FAIL,
+        payload: {},
+      });
     });
 };
