@@ -47,7 +47,7 @@ const authReducer = (state = authState, { type, payload }) => {
       localStorage.removeItem("auth");
       return { ...initialState };
 
-    case ActionTypes.LOTOUT_FAIL:
+    case ActionTypes.LOGOUT_FAIL:
       localStorage.removeItem("auth");
       return { ...initialState };
 

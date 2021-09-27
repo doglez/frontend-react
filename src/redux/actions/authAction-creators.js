@@ -11,10 +11,9 @@ export const RegisterAuthAction = (userState) => (dispatch) => {
       });
     })
     .catch((e) => {
-      console.error(e);
       dispatch({
         type: ActionTypes.REGISTER_FAIL,
-        payload: {},
+        payload: e.response.data,
       });
     });
 };
@@ -30,10 +29,9 @@ export const LogOutAuthAction = (history) => (dispatch) => {
       history.push("/");
     })
     .catch((e) => {
-      console.error(e);
       dispatch({
-        type: ActionTypes.LOTOUT_FAIL,
-        payload: {},
+        type: ActionTypes.LOGOUT_FAIL,
+        payload: e.response.data,
       });
       history.push("/");
     });
@@ -49,10 +47,9 @@ export const LoginAuthAction = (userState) => (dispatch) => {
       });
     })
     .catch((e) => {
-      console.error(e);
       dispatch({
         type: ActionTypes.LOGIN_FAIL,
-        payload: {},
+        payload: e.response.data,
       });
     });
 };
